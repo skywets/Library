@@ -1,6 +1,5 @@
 package data.entity;
 
-import java.sql.DataTruncation;
 import java.util.Date;
 
 public class Review {

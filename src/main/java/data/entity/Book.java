@@ -1,7 +1,6 @@
 package data.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Book {
     private long id;
@@ -11,9 +10,11 @@ public class Book {
     private String textBook;
     private int countOfPages;
     private LocalDate publishingDate;
+    private boolean popular;
+    private boolean newRelease;
+    private String genre;
 
-
-    public Book(long id, long catalogId, String title, String author, String textBook, int countOfPages, LocalDate publishingDate) {
+    public Book(long id, long catalogId, String title, String author, String textBook, int countOfPages, LocalDate publishingDate, boolean popular, boolean newRelease, String genre) {
         this.id = id;
         this.catalogId = catalogId;
         this.title = title;
@@ -21,12 +22,14 @@ public class Book {
         this.textBook = textBook;
         this.countOfPages = countOfPages;
         this.publishingDate = publishingDate;
+        this.popular = popular;
+        this.newRelease = newRelease;
+        this.genre = genre;
     }
-
-
 
     public Book() {
     }
+
     public long getId() {
         return id;
     }
@@ -83,15 +86,27 @@ public class Book {
         this.publishingDate = publishingDate;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", textBook='" + textBook + '\'' +
-                ", countOfPages=" + countOfPages +
-                ", publishingDate=" + publishingDate +
-                '}';
+    public boolean isPopular() {
+        return popular;
+    }
+
+    public void setPopular(boolean popular) {
+        this.popular = popular;
+    }
+
+    public boolean isNewRelease() {
+        return newRelease;
+    }
+
+    public void setNewRelease(boolean newRelease) {
+        this.newRelease = newRelease;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }
