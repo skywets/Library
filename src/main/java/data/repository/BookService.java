@@ -12,7 +12,8 @@ public class BookService {
     User user = new User();
     Book book = new Book();
     Scanner scanner = new Scanner(System.in);
-    public Book add() {
+
+    public Book createBook() {
         user.setBooks(new ArrayList<>());
         book.setId(scanner.nextLong());
         book.setCatalogId(scanner.nextLong());
@@ -21,36 +22,45 @@ public class BookService {
         book.setTextBook(scanner.next());
         book.setCountOfPages(scanner.nextInt());
         book.setPublishingDate(LocalDate.parse(scanner.next()));
-        user.getBooks().add(new Book(book.getId(), book.getCatalogId(),book.getTitle(), book.getAuthor(),
-                book.getTextBook(), book.getCountOfPages(), book.getPublishingDate()));
+        book.setPopular(scanner.nextBoolean());
+        book.setNewRelease(scanner.nextBoolean());
+        book.setGenre(scanner.next());
+        user.getBooks().add(new Book(book.getId(), book.getCatalogId(), book.getTitle(), book.getAuthor(),
+                book.getTextBook(), book.getCountOfPages(), book.getPublishingDate(),
+                book.isPopular(), book.isNewRelease(), book.getGenre()));
+        System.out.println("seccessfully create");
         return book;
     }
 
-    public Book getAll (long id) {
-        if (book.getId() == id){
-            for (Book b:user.getBooks())
+    public Book getAll(long id) {
+        if (book.getId() == id) {
+            for (Book b : user.getBooks())
                 return b;
         }
         return null;
     }
 
     public void update(long id) {
-        if (book.getId() == id){
-            for (Book book: user.getBooks()) {
+        if (book.getId() == id) {
+            for (Book book : user.getBooks()) {
                 book.setTitle(scanner.next());
                 book.setAuthor(scanner.next());
                 book.setTextBook(scanner.next());
                 book.setCountOfPages(scanner.nextInt());
                 book.setPublishingDate(LocalDate.parse(scanner.next()));
+                book.setPopular(scanner.nextBoolean());
+                book.setNewRelease(scanner.nextBoolean());
+                book.setGenre(scanner.next());
             }
         }
+        System.out.println("successfully update");
     }
 
     public void delete(long id) {
-        if (book.getId() == id){
-           user.getBooks().removeIf(b -> b.getId() == id);
+        if (book.getId() == id) {
+            user.getBooks().removeIf(b -> b.getId() == id);
             System.out.println("successfully delete");
-        }else
+        } else
             System.out.println("This id don't exists, try again!");
     }
 }

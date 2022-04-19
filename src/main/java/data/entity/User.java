@@ -17,10 +17,9 @@ public class User {
     private LocalDate birthday;
 
     private List<Book> books;
-
     Book book;
 
-    public User(long id, String login, String password, Date registryDate, long educationId, String name, String country, String language, String education, LocalDate birthday) {
+    public User(long id, String login, String password, Date registryDate, long educationId, String name, String country, String language, LocalDate birthday) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -29,9 +28,9 @@ public class User {
         this.name = name;
         this.country = country;
         this.language = language;
-        this.education = education;
         this.birthday = birthday;
     }
+
     public User() {}
 
     public long getId() {
