@@ -2,7 +2,6 @@ package data.entity;
 
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 public class User {
     private long id;
@@ -16,10 +15,9 @@ public class User {
     private String education;
     private LocalDate birthday;
 
-    private List<Book> books;
-    Book book;
 
-    public User(long id, String login, String password, Date registryDate, long educationId, String name, String country, String language, LocalDate birthday) {
+    public User(long id, String login, String password, Date registryDate, long educationId, String name, String country,
+                String language, String education, LocalDate birthday) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -28,10 +26,12 @@ public class User {
         this.name = name;
         this.country = country;
         this.language = language;
+        this.education = education;
         this.birthday = birthday;
     }
 
-    public User() {}
+    public User() {
+    }
 
     public long getId() {
         return id;
@@ -111,14 +111,6 @@ public class User {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
     }
 
     @Override
