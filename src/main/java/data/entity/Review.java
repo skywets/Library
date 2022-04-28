@@ -1,14 +1,14 @@
 package data.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Review {
     private long userId;
     private long bookId;
     private String text;
-    private Date reviewDate;
+    private LocalDate reviewDate;
 
-    public Review(long userId, long bookId, String text, Date reviewDate) {
+    public Review(long userId, long bookId, String text, LocalDate reviewDate) {
         this.userId = userId;
         this.bookId = bookId;
         this.text = text;
@@ -39,11 +39,11 @@ public class Review {
         this.text = text;
     }
 
-    public Date getReviewDate() {
+    public LocalDate getReviewDate() {
         return reviewDate;
     }
 
-    public void setReviewDate(Date reviewDate) {
+    public void setReviewDate(LocalDate reviewDate) {
         this.reviewDate = reviewDate;
     }
 }

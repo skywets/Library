@@ -4,46 +4,38 @@ import data.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class UserRepository implements Repository<User>{
-    private List<User> users;
+public class UserRepository implements Repository<User> {
+    private List<User> users = new ArrayList<>();
 
-    public UserRepository(List<User> users) {
-        this.users = users;
-    }
 
     @Override
-    public User getItem(long id) {
-        for (User user:users) {
-            if (user.getId() == id){
-                return user;
-            }
-        }
-        return null;
+    public Optional<User> getItem(long id) {
+        Optional<User> user = users.stream().filter(u -> u.getId() == id).findFirst();
+        return user;
     }
 
     @Override
     public User addItem(User item) {
-        users = new ArrayList<>();
-        users.add(new User(item.getId(), item.getLogin(), item.getPassword(),
-                item.getRegistryDate(), item.getEducationId(), item.getName(),
+        users.add(new User(item.getId(), item.getLogin(), item.getPassword(), item.getEducationId(), item.getName(),
                 item.getCountry(), item.getLanguage(), item.getEducation(), item.getBirthday()));
-        return (User) users;
+        return item;
     }
 
     @Override
     public User updateItem(User item) {
-        item.getId();
-        item.getLogin();
-        item.getPassword();
-        item.getRegistryDate();
-        item.getEducationId();
-        item.getName();
-        item.getCountry();
-        item.getLanguage();
-        item.getEducation();
-        item.getBirthday();
-        return item;
+        User updateUser = users.stream().filter(u -> u.getId() == u.getId()).findFirst().orElseThrow();
+        updateUser.setId(item.getId());
+        updateUser.setLogin(item.getLogin());
+        updateUser.setPassword(item.getPassword());
+        updateUser.setEducationId(item.getEducationId());
+        updateUser.setName(item.getName());
+        updateUser.setCountry(item.getCountry());
+        updateUser.setLanguage(item.getLanguage());
+        updateUser.setEducation(item.getEducation());
+        updateUser.setBirthday(item.getBirthday());
+        return updateUser;
     }
 
     @Override
