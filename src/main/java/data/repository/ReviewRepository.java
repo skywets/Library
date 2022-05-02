@@ -4,16 +4,17 @@ import data.entity.Review;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ReviewRepository implements Repository<Review> {
-    private List<Review> reviews = new ArrayList<>();
+    private final List<Review> reviews = new ArrayList<>();
 
     @Override
-    public Optional<Review> getItem(long id) {
-        Optional<Review> review = reviews.stream().filter(r -> r.getUserId() == id)
-                .findFirst();
-        return review;
+    public Review getItem(long id) {
+        return findUserById(id);
+    }
+
+    private Review findUserById(long id) {
+        return reviews.stream().filter(r -> r.getUserId() == id).findFirst().orElseThrow();
     }
 
     @Override
@@ -24,8 +25,7 @@ public class ReviewRepository implements Repository<Review> {
 
     @Override
     public Review updateItem(Review item) {
-        Review review = reviews.stream().filter(r -> r.getUserId() == item.getUserId())
-                .findFirst().orElseThrow();
+        Review review = findUserById(item.getUserId());
         review.setUserId(item.getUserId());
         review.setBookId(item.getBookId());
         review.setText(item.getText());

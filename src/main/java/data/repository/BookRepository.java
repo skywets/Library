@@ -2,10 +2,8 @@ package data.repository;
 
 import data.entity.Book;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class BookRepository implements Repository<Book> {
     private List<Book> books = new ArrayList<>();
@@ -18,25 +16,25 @@ public class BookRepository implements Repository<Book> {
     }
 
     @Override
-    public Optional<Book> getItem(long id) {
-        books.add(new Book(1, 1, "t", "a", "tt", 11,
-                LocalDate.now(), true, true, "gg"));
-        Optional<Book> book = books.stream().filter(b -> b.getId() == id).findFirst();
+    public Book getItem(long id) {
+        Book book = findUserById(id);
+        return book;
+    }
+
+    private Book findUserById(long id) {
+        Book book = books.stream().filter(b -> b.getId() == id).findFirst().orElseThrow();
         return book;
     }
 
     @Override
     public Book addItem(Book item) {
-        books.add(new Book(item.getId(), item.getCatalogId(), item.getTitle(),
-                item.getAuthor(), item.getTextBook(), item.getCountOfPages(),
-                item.getPublishingDate(), item.isPopular(),
-                item.isNewRelease(), item.getGenre()));
+        books.add(new Book(item.getId(), item.getCatalogId(), item.getTitle(), item.getAuthor(), item.getTextBook(), item.getCountOfPages(), item.getPublishingDate(), item.isPopular(), item.isNewRelease(), item.getGenre()));
         return item;
     }
 
     @Override
     public Book updateItem(Book item) {
-        Book book = books.stream().filter(b -> b.getId() == item.getId()).findFirst().orElseThrow();
+        Book book = findUserById(item.getId());
         book.setId(item.getId());
         book.setCatalogId(item.getCatalogId());
         book.setTitle(item.getTitle());

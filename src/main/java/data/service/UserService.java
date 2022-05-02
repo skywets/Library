@@ -10,8 +10,8 @@ public class UserService {
 
 
     //здесь тоже OPTIONAL Чтобы не веннулся nosuchelementEXception, а вернулся Optional.empty, так?
-    public Optional<User> getItem(long id) {
-        return ur.getItem(id).stream().findFirst();
+    public User getItem(long id) {
+        return ur.getItem(id);
     }
 
     public void createUser(User user) {

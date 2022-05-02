@@ -4,14 +4,20 @@ import data.entity.Education;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class EducationRepository implements Repository<Education> {
     private List<Education> educations = new ArrayList<>();
 
     @Override
-    public Optional<Education> getItem(long id) {
-        Optional<Education> education = educations.stream().filter(e -> e.getId() == id).findFirst();
+    public Education getItem(long id) {
+        Education education = findUserById(id);
+        return education;
+    }
+
+    private Education findUserById(long id) {
+        Education education = educations.stream().filter(u -> u.getId() == id)
+                .findFirst()
+                .orElseThrow();
         return education;
     }
 
@@ -23,8 +29,7 @@ public class EducationRepository implements Repository<Education> {
 
     @Override
     public Education updateItem(Education item) {
-        Education education = educations.stream().filter(e -> e.getId() == item.getId())
-                .findFirst().orElseThrow();
+        Education education = findUserById(item.getId());
         education.setId(item.getId());
         education.setElematrySchool(item.getElematrySchool());
         education.setSecondrySchool(item.getSecondrySchool());

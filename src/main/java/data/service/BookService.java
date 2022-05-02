@@ -7,7 +7,7 @@ public class BookService {
     private BookRepository br;
 
     public Book getItem(long id) {
-        return br.getItem(id).orElseThrow();
+        return br.getItem(id);
     }
 
     public void createBook(Book book) {

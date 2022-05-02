@@ -1,11 +1,9 @@
 package data.controller;
 
 import data.entity.User;
-import data.repository.UserRepository;
 import data.service.UserService;
 
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class UserMenu {
@@ -19,18 +17,23 @@ public class UserMenu {
     private String language;
     private String education;
     private LocalDate birthday;
-    UserRepository userRepository = new UserRepository();
     UserService userService = new UserService();
-    User user = new User();
     Scanner sc = new Scanner(System.in);
 
     public UserMenu() {
     }
 
-    public UserMenu( UserRepository userRepository, UserService userService, User user) {
-        this.userRepository = userRepository;
+    public UserMenu(long id, String login, String password, long educationId, String name, String country, String language, String education, LocalDate birthday, UserService userService, User user) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.educationId = educationId;
+        this.name = name;
+        this.country = country;
+        this.language = language;
+        this.education = education;
+        this.birthday = birthday;
         this.userService = userService;
-        this.user = user;
     }
 
     public void showAddUser() {
@@ -54,11 +57,9 @@ public class UserMenu {
         birthday = LocalDate.parse(sc.next());
         userService.createUser(new User(id, login, password, educationId,
                 name, country, language, education, birthday));
-
     }
 
     public void showEditUser() {
-        userService.editUser(user.getId(), new User());
         System.out.println("Enter user id: ");
         id = sc.nextLong();
         System.out.println("Enter user login: ");
@@ -77,11 +78,12 @@ public class UserMenu {
         education = sc.next();
         System.out.println("Enter user birthday: ");
         birthday = LocalDate.parse(sc.next());
+        userService.editUser(id, new User(id, login, password, educationId, name, country, language, education, birthday));
 
     }
 
-    public Optional<User> getItem(long id){
-       return userService.getItem(id);
+    public User getItem(long id) {
+        return userService.getItem(id);
     }
 
     public void showDelete(long id) {

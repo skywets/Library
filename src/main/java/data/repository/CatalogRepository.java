@@ -4,14 +4,20 @@ import data.entity.Catalog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class CatalogRepository implements Repository<Catalog> {
     private List<Catalog> catalogs = new ArrayList<>();
 
     @Override
-    public Optional<Catalog> getItem(long id) {
-        Optional<Catalog> catalog = catalogs.stream().filter(c -> c.getId() == id).findFirst();
+    public Catalog getItem(long id) {
+        Catalog catalog = findUserById(id);
+        return catalog;
+    }
+
+    private Catalog findUserById(long id) {
+        Catalog catalog = catalogs.stream().filter(c -> c.getId() == id)
+                .findFirst()
+                .orElseThrow();
         return catalog;
     }
 
@@ -23,8 +29,7 @@ public class CatalogRepository implements Repository<Catalog> {
 
     @Override
     public Catalog updateItem(Catalog item) {
-        Catalog catalog = catalogs.stream().filter(c -> c.getId() == item.getId()).findFirst()
-                .orElseThrow();
+        Catalog catalog = findUserById(item.getId());
         catalog.setId(item.getId());
         catalog.setName(item.getName());
         return catalog;
