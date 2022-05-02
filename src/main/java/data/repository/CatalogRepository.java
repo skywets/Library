@@ -6,32 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogRepository implements Repository<Catalog> {
-    private List<Catalog> catalogs;
+    private List<Catalog> catalogs = new ArrayList<>();
+
     @Override
     public Catalog getItem(long id) {
-        for (Catalog catalog:catalogs) {
-            if (catalog.getId() == id){
-                return catalog;
-            }
-        }
-        return null;
+        Catalog catalog = findUserById(id);
+        return catalog;
+    }
+
+    private Catalog findUserById(long id) {
+        Catalog catalog = catalogs.stream().filter(c -> c.getId() == id)
+                .findFirst()
+                .orElseThrow();
+        return catalog;
     }
 
     @Override
     public Catalog addItem(Catalog item) {
-        catalogs = new ArrayList<>();
-        catalogs.add(new Catalog(item.getId(), item.getProgramming(),
-                item.getDetective(), item.getFantastic()));
+        catalogs.add(new Catalog(item.getId(), item.getName()));
         return item;
     }
 
     @Override
     public Catalog updateItem(Catalog item) {
-        item.getId();
-        item.getProgramming();
-        item.getDetective();
-        item.getFantastic();
-        return item;
+        Catalog catalog = findUserById(item.getId());
+        catalog.setId(item.getId());
+        catalog.setName(item.getName());
+        return catalog;
     }
 
     @Override

@@ -1,23 +1,17 @@
-import data.repository.BookService;
-import data.repository.UserService;
+import data.controller.UserMenu;
+import data.entity.User;
+import data.repository.UserRepository;
+import data.service.UserService;
+import data.ui.ViewMenu;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        UserService userService = new UserService();
-        System.out.print(userService.signUp());
-        System.out.println(userService.signIn(scanner.next(), scanner.next()));
-        userService.signOut();
-//
-//        BookService bookService = new BookService();
-//        System.out.println(bookService.add());
-//        bookService.delete(1);
-//        System.out.println(bookService.add());
-//        System.out.println(bookService.getAll(2));
-//        bookService.update(2);
-//        System.out.println(bookService.getAll(2));
+        ViewMenu viewMenu = new ViewMenu();
+        viewMenu.show();
+
+
     }
 }

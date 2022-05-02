@@ -2,15 +2,11 @@ package data.entity;
 
 public class Catalog {
     private long id;
-    private String programming;
-    private String detective;
-    private String fantastic;
+    private String name;
 
-    public Catalog(long id, String programming, String detective, String fantastic) {
+    public Catalog(long id, String name) {
         this.id = id;
-        this.programming = programming;
-        this.detective = detective;
-        this.fantastic = fantastic;
+        this.name = name;
     }
 
     public long getId() {
@@ -21,27 +17,11 @@ public class Catalog {
         this.id = id;
     }
 
-    public String getProgramming() {
-        return programming;
+    public String getName() {
+        return name;
     }
 
-    public void setProgramming(String programming) {
-        this.programming = programming;
-    }
-
-    public String getDetective() {
-        return detective;
-    }
-
-    public void setDetective(String detective) {
-        this.detective = detective;
-    }
-
-    public String getFantastic() {
-        return fantastic;
-    }
-
-    public void setFantastic(String fantastic) {
-        this.fantastic = fantastic;
+    public void setName(String name) {
+        this.name = name;
     }
 }

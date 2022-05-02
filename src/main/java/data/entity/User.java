@@ -1,13 +1,13 @@
 package data.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class User {
     private long id;
     private String login;
     private String password;
-    private Date registryDate;
+    private final LocalDateTime REGISTRYDATE = LocalDateTime.now();
     private long educationId;
     private String name;
     private String country;
@@ -16,12 +16,11 @@ public class User {
     private LocalDate birthday;
 
 
-    public User(long id, String login, String password, Date registryDate, long educationId, String name, String country,
+    public User(long id, String login, String password, long educationId, String name, String country,
                 String language, String education, LocalDate birthday) {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.registryDate = registryDate;
         this.educationId = educationId;
         this.name = name;
         this.country = country;
@@ -57,13 +56,10 @@ public class User {
         this.password = password;
     }
 
-    public Date getRegistryDate() {
-        return registryDate;
+    public LocalDateTime getREGISTRYDATE() {
+        return REGISTRYDATE;
     }
 
-    public void setRegistryDate(Date registryDate) {
-        this.registryDate = registryDate;
-    }
 
     public long getEducationId() {
         return educationId;
@@ -119,7 +115,7 @@ public class User {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", registryDate=" + registryDate +
+                ", registryDate=" + REGISTRYDATE +
                 ", educationId=" + educationId +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
